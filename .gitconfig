@@ -1,0 +1,16 @@
+[user]
+	name = Graham Albachten
+	email = albachteng@gmail.com
+[credential]
+	helper = osxkeychain
+[color]
+	ui = auto
+[alias]
+	slas = log --oneline --decorate --graph --all
+	sla = log --oneline --decorate --graph --all
+	glog = log -E -i --grep
+	car = commit --amend --no-edit
+	unstage = reset
+	uncommit = reset --soft HEAD^
+[core]
+	autocrlf = input
