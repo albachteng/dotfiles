@@ -7,6 +7,10 @@ filetype on
 " Enable plugins and load plugin for the detected file type.
 filetype plugin on
 
+" Set automatic indent on line-wrap and max text width
+set autoindent
+set textwidth=80
+
 " Load an indent file for the detected file type.
 filetype indent on
 
@@ -153,7 +157,15 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" More Vimscripts code goes here.
+" Word Processor function 
+func! WordProcessorMode()
+ setlocal textwidth=80
+ setlocal smartindent
+ setlocal spell spelllang=en_us
+ setlocal noexpandtab
+endfu
+
+com! WP call WordProcessorMode()
 
 " }}}
 
