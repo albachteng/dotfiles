@@ -1,16 +1,3 @@
-
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2019 Dec 17
-"
-" To use it, copy it to
-"	       for Unix:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"	 for MS-Windows:  $VIM\_vimrc
-"	      for Haiku:  ~/config/settings/vim/vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
 " When started as "evim", evim.vim will already have done these settings, bail
 " out.
 if v:progname =~? "evim"
@@ -54,6 +41,9 @@ endif
 
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
+
+" Disable swapfiles, which can be annoying, override with :setlocal swapfile
+set noswapfile
 
 " Enable type file detection. Vim will be able to try to detect the type of file in use.
 filetype on
@@ -149,8 +139,11 @@ call plug#end()
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
+" set jk as escape key alias
+inoremap jk <ESC>
+
 " Set the backslash as the leader key.
-let mapleader = "\\"
+let mapleader = "'"
 
 " Press \\ to jump back to the last cursor position.
 nnoremap <leader>\ ``
