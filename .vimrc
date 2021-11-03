@@ -7,6 +7,27 @@ endif
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
+" Pathogen bundles section (?)
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
+
+" prevent security exploits
+set modelines=0
+
+" handle long lines correctly
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
+
+" tab settings
+set softtabstop=4
+
+" apply substitutions globally on lines
+
+set gdefault
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
@@ -20,14 +41,6 @@ if &t_Co > 2 || has("gui_running")
   " Switch on highlighting the last used search pattern.
   set hlsearch
 endif
-
-" Put these in an autocmd group, so that we can delete them easily.
-augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-augroup END
 
 " Add optional packages.
 "
@@ -45,7 +58,8 @@ set nocompatible
 " Disable swapfiles, which can be annoying, override with :setlocal swapfile
 set noswapfile
 
-" Enable type file detection. Vim will be able to try to detect the type of file in use.
+" Enable type file detection. Vim will be able to try to detect the type of file
+" in use.
 filetype on
 
 " Enable plugins and load plugin for the detected file type.
@@ -67,6 +81,21 @@ set number
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
+" Enables fast drawing of characters to the screen for smooth loading
+set ttyfast
+
+" sets ruler information for line position
+set ruler
+
+" ???
+set backspace=indent,eol,start
+
+" set line numbers to be relative to the current line
+set relativenumber
+
+" create undo files to allow undos after saving or closing
+set undofile
+
 " Highlight cursor line underneath the cursor vertically.
 set cursorcolumn
 
@@ -83,7 +112,13 @@ set expandtab
 set nobackup
 
 " Do not let cursor scroll below or above N number of lines when scrolling.
-set scrolloff=10
+set scrolloff=3
+
+" avoids unloading files not in active use ?
+set hidden
+
+" instead of 'beeping'
+set visualbell
 
 " Do not wrap lines. Allow long lines to extend as far as the line goes.
 set nowrap
@@ -124,6 +159,8 @@ set wildmode=list:longest
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " PLUGINS ---------------------------------------------------------------- {{{
+
+" TODO move these into ~/.vim/pack/pluginfoldername/ => start/pluginname
 call plug#begin('~/.vim/plugged')
 
     Plug 'dense-analysis/ale'
@@ -132,11 +169,44 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'preservim/nerdtree'
 
+    Plug 'tpope/vim-surround'
+
 call plug#end()
 
 " }}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
+
+" 'w opens a new vertical split and switches over to it, ctrl-j/k/l/h switches
+" panes
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" sort CSS properties in a file
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+
+" strip all trailing whitespace in the file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" ; => : for commands and saves
+nnoremap ; :
+
+" clears search highlights (which are annoying when you're done with them)
+nnoremap <leader><space> :noh<cr>
+
+" tab is easier to hit than % for brackets pairing
+nnoremap <tab> %
+vnoremap <tab> %
+
+" fix default regex
+nnoremap / /\v
+vnoremap / /\v
+
+" normalize . command (?)
+vnoremap . :norm.<CR>
 
 " set jk as escape key alias
 inoremap jk <ESC>
@@ -144,8 +214,14 @@ inoremap jk <ESC>
 " Set the backslash as the leader key.
 let mapleader = "'"
 
-" Press \\ to jump back to the last cursor position.
-nnoremap <leader>\ ``
+" Press '' to jump back to the last cursor position.
+nnoremap <leader>' ``
+
+" Press 'f fix spelling
+nnoremap <leader>f 1z=
+
+" toggle spelling visuals with 's
+nnoremap <leader>s :set spell!
 
 " Press \p to print the current file to the default printer from a Linux operating system.
 " View available printers:   lpstat -v
@@ -196,6 +272,9 @@ let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', 
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
 
+" save on losing focus (when tabbing away, etc)
+au FocusLost * :wa
+
 " This will enable code folding.
 " Use the marker method of folding.
 augroup filetype_vim
@@ -203,7 +282,7 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" Word Processor function 
+" Word Processor function
 func! WordProcessorMode()
  setlocal textwidth=80
  setlocal smartindent
@@ -239,7 +318,7 @@ if has('gui_running')
     set background=dark
 
     " Set the color scheme.
-    colorscheme molokai
+    colorscheme cobalt2 
 
     " Set a custom font you have installed on your computer.
     " Syntax: set guifont=<font_name>\ <font_weight>\ <size>
@@ -275,7 +354,7 @@ endif
 " }}}
 
 
-" STATUS LINE ------------------------------------------------------------ {{{ 
+" STATUS LINE ------------------------------------------------------------ {{{
 
 " Clear status line when vimrc is reloaded.
 set statusline=
