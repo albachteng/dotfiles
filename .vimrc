@@ -8,9 +8,9 @@ endif
 source $VIMRUNTIME/defaults.vim
 
 " Pathogen bundles section (?)
-filetype off
-call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
+" filetype off
+" call pathogen#runtime_append_all_bundles()
+" filetype plugin indent on
 
 " prevent security exploits
 set modelines=0
@@ -237,8 +237,8 @@ nnoremap <space> :
 
 " Pressing the letter o will open a new line below the current one.
 " Exit insert mode after creating a new line above or below the current line.
-nnoremap o o<esc>
-nnoremap O O<esc>
+" nnoremap o o<esc>
+" nnoremap O O<esc>
 
 " Center the cursor vertically when moving to the next word during a search.
 nnoremap n nzz
