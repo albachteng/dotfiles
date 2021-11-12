@@ -12,6 +12,7 @@ source $VIMRUNTIME/defaults.vim
 " call pathogen#runtime_append_all_bundles()
 " filetype plugin indent on
 
+
 " prevent security exploits
 set modelines=0
 
@@ -23,6 +24,7 @@ set colorcolumn=85
 
 " tab settings
 set softtabstop=4
+set smartindent
 
 " apply substitutions globally on lines
 
@@ -171,11 +173,27 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'tpope/vim-surround'
 
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+    Plug 'junegunn/fzf.vim'
+
+    Plug 'arcticicestudio/nord-vim'
+
+    Plug 'dracula/vim', { 'as': 'dracula' }
+
+    Plug 'drewtempelmeyer/palenight.vim'
+    
+
 call plug#end()
 
 " }}}
 
+" Set the color scheme.
+colorscheme nord
 " MAPPINGS --------------------------------------------------------------- {{{
+
+" Set the space as the leader key.
+let mapleader = " "
 
 " 'w opens a new vertical split and switches over to it, ctrl-j/k/l/h switches
 " panes
@@ -184,6 +202,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" map fuzzy finder to ctrl-p
+nnoremap <C-p> :GFiles<CR>
+nnoremap <leader>pf :Files<CR>
 
 " sort CSS properties in a file
 nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
@@ -210,9 +232,6 @@ vnoremap . :norm.<CR>
 
 " set jk as escape key alias
 inoremap jk <ESC>
-
-" Set the backslash as the leader key.
-let mapleader = "'"
 
 " Press '' to jump back to the last cursor position.
 nnoremap <leader>' ``
@@ -316,9 +335,6 @@ if has('gui_running')
 
     " Set the background tone.
     set background=dark
-
-    " Set the color scheme.
-    colorscheme cobalt2 
 
     " Set a custom font you have installed on your computer.
     " Syntax: set guifont=<font_name>\ <font_weight>\ <size>
