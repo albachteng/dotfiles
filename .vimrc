@@ -142,6 +142,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'arcticicestudio/nord-vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'drewtempelmeyer/palenight.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -149,7 +151,7 @@ call plug#end()
 
 " Set the color scheme.
 " needs to be after plugins
-colorscheme dracula
+colorscheme cobalt2
 
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
