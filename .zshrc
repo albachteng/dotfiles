@@ -16,6 +16,8 @@ ZSH_THEME="agnoster"
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
+# insert newline before each command line
+precmd() { print "" }
 
 # partial completion suggestions
  zstyle ':completion:*' list-suffixeszstyle ':completion:*' expand prefix suffix

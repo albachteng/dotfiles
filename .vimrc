@@ -144,6 +144,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'drewtempelmeyer/palenight.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'leafgarland/typescript-vim'
+    Plug 'prabirshrestha/vim-lsp'
 
 call plug#end()
 
