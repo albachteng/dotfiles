@@ -145,6 +145,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'pangloss/vim-javascript'
     Plug 'leafgarland/typescript-vim'
     Plug 'prabirshrestha/vim-lsp'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
