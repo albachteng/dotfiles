@@ -35,6 +35,9 @@ endif
 nnoremap n nzz
 nnoremap N Nzz
 
+" syntax syncs from start
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
