@@ -144,6 +144,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'drewtempelmeyer/palenight.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'leafgarland/typescript-vim'
+    Plug 'peitalin/vim-jsx-typescript'
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'jparise/vim-graphql'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
