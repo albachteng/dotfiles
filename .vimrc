@@ -55,9 +55,6 @@ set showmatch
 " Use highlighting when doing a search.
 set hlsearch
 
-" double spacebar clears search highlights 
-nnoremap <leader><space> :noh<cr>
-
 " Add optional packages.
 "
 " Disable compatibility with vi which can cause unexpected issues.
@@ -169,6 +166,9 @@ let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', 
 " Set the space as the leader key.
 let mapleader = " "
 
+" double spacebar clears search highlights 
+nnoremap <leader><space> :noh<cr>
+
 " _w opens a new vertical split and switches over to it, ctrl-j/k/l/h switches
 " panes
 nnoremap <leader>w <C-w>v<C-w>l
@@ -186,7 +186,7 @@ nnoremap <leader>pf :Files<CR>
 " nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " ; => : for commands and saves
-nnoremap ; :
+" nnoremap ; :
 
 " tab is easier to hit than % for brackets pairing
 nnoremap <tab> %
@@ -207,7 +207,7 @@ inoremap jk <ESC>
 nnoremap <leader>' ``
 
 " Toggle spelling visuals with _s
-nnoremap <leader>s :set spell!<CR>
+" nnoremap <leader>s :set spell!<CR>
 
 " Yank from cursor to the end of line.
 " very intuitive, but I kind of prefer Vy or Vd
@@ -261,7 +261,7 @@ set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%=
 
 " Status line right side.
-set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+set statusline+=\ row:\ %l\ col:\ %c\ percent:\ %p%%
 
 " Show the status on the second to last line.
 set laststatus=2
