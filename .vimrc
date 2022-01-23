@@ -35,7 +35,6 @@ endif
 nnoremap n nzz
 nnoremap N Nzz
 
-
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
 
@@ -52,11 +51,6 @@ set showmatch
 " Use highlighting when doing a search.
 set hlsearch
 
-" double spacebar clears search highlights 
-nnoremap <leader><space> :noh<cr>
-
-" Add optional packages.
-"
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
@@ -100,9 +94,8 @@ set relativenumber
 " Highlight cursor line underneath the cursor vertically.
 set cursorcolumn
 
-
 " Do not save backup files.
-" set nobackup
+ set nobackup
 
 " Do not let cursor scroll below or above N number of lines when scrolling.
 set scrolloff=4
@@ -112,6 +105,7 @@ set scrolloff=4
 
 " instead of 'beeping'
 set visualbell
+"
 " Show partial command you type in the last line of the screen.
 set showcmd
 
@@ -155,6 +149,9 @@ call plug#end()
 " needs to be after plugins
 colorscheme cobalt2
 
+" set fzf for vim
+set rtp+=/usr/local/opt/fzf
+
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
 
@@ -162,6 +159,9 @@ let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', 
 
 " Set the space as the leader key.
 let mapleader = " "
+
+" double spacebar clears search highlights 
+nnoremap <leader><space> :noh<cr>
 
 " _w opens a new vertical split and switches over to it, ctrl-j/k/l/h switches
 " panes
@@ -175,12 +175,13 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-p> :GFiles<CR>
 " alt for when you're not in a git repo (which could be massive, be careful)
 nnoremap <leader>pf :Files<CR>
+nnoremap <silent> <C-f> :silent !tmux neww ~/tmux-sessionizer<CR>
 
 " strip all trailing whitespace in the file
 " nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " ; => : for commands and saves
-nnoremap ; :
+" nnoremap ; :
 
 " tab is easier to hit than % for brackets pairing
 nnoremap <tab> %
@@ -197,7 +198,7 @@ vnoremap <tab> %
 " set jk as escape key alias (the holiest of holies)
 inoremap jk <ESC>
 
-" Press __ to jump back to the last cursor position.
+" Press _' to jump back to the last cursor position.
 nnoremap <leader>' ``
 
 " Toggle spelling visuals with _s
