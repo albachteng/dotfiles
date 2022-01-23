@@ -35,6 +35,10 @@ endif
 nnoremap n nzz
 nnoremap N Nzz
 
+" syntax syncs from start
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
 
@@ -138,6 +142,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'drewtempelmeyer/palenight.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'leafgarland/typescript-vim'
+    Plug 'peitalin/vim-jsx-typescript'
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'jparise/vim-graphql'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -202,7 +209,7 @@ inoremap jk <ESC>
 nnoremap <leader>' ``
 
 " Toggle spelling visuals with _s
-nnoremap <leader>s :set spell!<CR>
+" nnoremap <leader>s :set spell!<CR>
 
 " Yank from cursor to the end of line.
 " very intuitive, but I kind of prefer Vy or Vd
@@ -256,7 +263,7 @@ set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%=
 
 " Status line right side.
-set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+set statusline+=\ row:\ %l\ col:\ %c\ percent:\ %p%%
 
 " Show the status on the second to last line.
 set laststatus=2
