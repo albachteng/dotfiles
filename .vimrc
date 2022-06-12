@@ -147,7 +147,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'jparise/vim-graphql'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+ 
 call plug#end()
 
 " }}}
