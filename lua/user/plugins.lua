@@ -175,7 +175,11 @@ return packer.startup(function(use)
       "RRethy/vim-illuminate",
       commit = "c82e6d04f27a41d7fdcad9be0bce5bb59fcb78e5"
     }
-  use {"ray-x/go.nvim"}
+    use {
+      "ray-x/go.nvim",
+      -- config = require("go"),
+      -- ft = { "go" }
+    }
 
   -- Telescope
     use {

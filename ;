@@ -1,12 +1,14 @@
-local status_ok, gonvim = pcall(require, "go.nvim")
+local status_ok, gonvim = pcall(require, "go")
 if not status_ok then
   return
 end
 
+print(status_ok)
+print(gonvim)
 -- NOTE: all LSP and formatting related options are disabeld.
 -- NOTE: LSP is handled by lsp.lua and formatting is handled by null-ls.lua
 
-require("go.nvim").setup({
+gonvim.setup({
 	go = "go", -- go command, can be go[default] or go1.18beta1
 	goimport = "gopls", -- goimport command, can be gopls[default] or goimport
 	fillstruct = "gopls", -- can be nil (use fillstruct, slower) and gopls
