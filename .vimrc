@@ -1,8 +1,11 @@
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
+set encoding=utf-8
+
 " prevent security exploits
 set modelines=0
+
 
 " handle long lines correctly
 set wrap
@@ -42,12 +45,53 @@ autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
 
-" Ignore capital letters during search.
+" ignore capital letters during search
 set ignorecase
 
-" Override the ignorecase option if searching for capital letters.
-" This will allow you to search specifically for capital letters.
+" override ignorecase option if searching with capital letters
 set smartcase
+
+"long update time leads to noticeable delays and poor user experience 
+"default update time is 4000ms
+set updatetime=300
+
+"don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" nnoremap / /\v
+" vnoremap / /\v
+
+" normalize . command 
+vnoremap . :norm.<CR>
+
+" set jk as escape key alias (the holiest of holies)
+inoremap jk <ESC>
+
+"
+" Press _' to jump back to the last cursor position.
+nnoremap <leader>' ``
+
+" Toggle spelling visuals with _s
+" nnoremap <leader>s :set spell!<CR>
+
+" Yank from cursor to the end of line.
+" very intuitive, but I kind of prefer Vy or Vd
+nnoremap Y y$
+
+" Resize split windows using arrow keys by pressing:
+" CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
+" I love this idea, but it is overridden by system commands
+" noremap <c-up> <c-w>+
+" noremap <c-down> <c-w>-
+" noremap <c-left> <c-w>>
+" noremap <c-right> <c-w><
+
+" NERDTree specific mappings.
+" Map the F3 key to toggle NERDTree open and close.
+nnoremap <F3> :NERDTreeToggle<cr>
+
+" }}}
+
 
 " Show matching words during a search.
 set showmatch
@@ -87,9 +131,9 @@ set ttyfast
 set ruler
 
 " ???
-" set backspace=indent,eol,start
+set backspace=indent,eol,start
 
-" set line numbers to be relative to the current line
+" set line numbers relative to the current line
 set relativenumber
 
 " create undo files to allow undos after saving or closing
@@ -100,12 +144,16 @@ set cursorcolumn
 
 " Do not save backup files.
  set nobackup
+ set nowritebackup
 
-" Do not let cursor scroll below or above N number of lines when scrolling.
-set scrolloff=4
+ "do not let cursor scroll below or above n number of lines when scrolling
+ set scrolloff=4
+ 
+" Do not let cursor scroll below or ads unloading files not in active use ?
+set hidden
 
-" avoids unloading files not in active use ?
-" set hidden
+" Give more space for displaying messages.
+set cmdheight=2
 
 " instead of 'beeping'
 set visualbell
@@ -123,65 +171,8 @@ set wildmenu
 set wildmode=list:longest
 
 " There are certain files that we would never want to edit with Vim.
-" Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-" PLUGINS ---------------------------------------------------------------- {{{
-
-" use plug to manage plugins with :PlugInstall
-call plug#begin('~/.vim/plugged')
-
-    Plug 'dense-analysis/ale'
-    Plug 'gertjanreynaert/cobalt2-vim-theme'
-    Plug 'preservim/nerdtree'
-    Plug 'tpope/vim-surround'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'dracula/vim', { 'as': 'dracula' }
-    Plug 'drewtempelmeyer/palenight.vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'peitalin/vim-jsx-typescript'
-    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-    Plug 'jparise/vim-graphql'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
- 
-call plug#end()
-
-" }}}
-
-" Set the color scheme.
-	
-" needs to be after plugins
-colorscheme cobalt2
-
-" set fzf for vim
-set rtp+=/usr/local/opt/fzf
-
-" Have nerdtree ignore certain files and directories.
-let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
-
-" MAPPINGS --------------------------------------------------------------- {{{
-
-" Set the space as the leader key.
-let mapleader = " "
-
-" double spacebar clears search highlights 
-nnoremap <leader><space> :noh<cr>
-
-" _w opens a new vertical split and switches over to it, ctrl-j/k/l/h switches
-" panes
-nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" map fuzzy finder to ctrl-p
-nnoremap <C-p> :GFiles<CR>
 " alt for when you're not in a git repo (which could be massive, be careful)
 nnoremap <leader>pf :Files<CR>
 nnoremap <silent> <C-f> :silent !tmux neww ~/tmux-sessionizer<CR>
@@ -195,43 +186,6 @@ nnoremap <silent> <C-f> :silent !tmux neww ~/tmux-sessionizer<CR>
 " tab is easier to hit than % for brackets pairing
 nnoremap <tab> %
 vnoremap <tab> %
-
-" amend  default regex to use "very magic" mode. 
-" for now, commenting-out because I'm not sure I entirely understand it
-" nnoremap / /\v
-" vnoremap / /\v
-
-" normalize . command (also commenting out b/c I don't quite get it)
-" vnoremap . :norm.<CR>
-
-" set jk as escape key alias (the holiest of holies)
-inoremap jk <ESC>
-
-" Press _' to jump back to the last cursor position.
-nnoremap <leader>' ``
-
-" Toggle spelling visuals with _s
-" nnoremap <leader>s :set spell!<CR>
-
-" Yank from cursor to the end of line.
-" very intuitive, but I kind of prefer Vy or Vd
-nnoremap Y y$
-
-" Resize split windows using arrow keys by pressing:
-" CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
-" I love this idea, but it is overridden by system commands
-" noremap <c-up> <c-w>+
-" noremap <c-down> <c-w>-
-" noremap <c-left> <c-w>>
-" noremap <c-right> <c-w><
-
-" NERDTree specific mappings.
-" Map the F3 key to toggle NERDTree open and close.
-nnoremap <F3> :NERDTreeToggle<cr>
-
-" }}}
-
-" VIMSCRIPT -------------------------------------------------------------- {{{
 
 " save on losing focus (when tabbing away, etc)
 au FocusLost * :wa
@@ -250,6 +204,70 @@ augroup cursor_off
     autocmd WinLeave * set nocursorline nocursorcolumn
     autocmd WinEnter * set cursorline cursorcolumn
 augroup END
+
+" tries to silently download vim plug if it doesn't exist
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif"
+
+" PLUGINS ------------------------------------------------------------- {{{
+call plug#begin('~/.vim/plugged')
+
+    Plug 'dense-analysis/ale'
+    Plug 'gertjanreynaert/cobalt2-vim-theme'
+    Plug 'preservim/nerdtree'
+    Plug 'tpope/vim-surround'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'drewtempelmeyer/palenight.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'peitalin/vim-jsx-typescript'
+    Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+    Plug 'jparise/vim-graphql'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-tsserver', 'coc-go', 'coc-json', 'coc-git', 'coc-html', 'coc-css' ]
+
+call plug#end()
+
+" }}}
+
+colorscheme palenight
+
+"set fzf for vim
+set rtp+=~/.fzf
+
+" have nerdtree ignore certain files and directories
+let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
+
+" MAPPINGS ---------------------------------------------- {{{
+
+" maplader is spacebar 
+let mapleader = ' '
+
+" double spacebar clears search highlights 
+nnoremap <leader><space> :noh<cr>
+
+" _w opens a new vertical split and switches over to it, ctrl-j/k/l/h switches
+" panes
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" map fuzzy finder to ctrl-p
+nnoremap <C-p> :GFiles<CR>
+" alt for when you're not in a git repo (which could be massive, be careful)
+nnoremap <leader>pf :Files<CR>
+nnoremap <silent> <C-f> :silent !tmux neww ~/tmux-sessionizer<CR>
 
 " }}}
 
@@ -272,15 +290,16 @@ set laststatus=2
 
 " }}}
 
-" Always show the signcolumn, otherwise it would shift the text each time                     
-" diagnostics appear/become resolved.                                                         
-if has("nvim-0.5.0") || has("patch-8.1.1564")                                                 
-  " Recently vim can merge signcolumn and number column into one                                
-  set signcolumn=number
-  else                                                                                          
-  set signcolumn=yes                                                                            
-endif                                                                                    
-"use tab trigger completion with characters ahead and navigate.
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+" Recently vim can merge signcolumn and number column into one
+set signcolumn=number
+else
+set signcolumn=yes
+endif
+
+"use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
@@ -290,15 +309,15 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-  else
-  inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
+else
+inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 "make <CR> auto-select first completion item and notify coc.nvim to format on
@@ -341,13 +360,13 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
-  
+
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -406,4 +425,4 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 " add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}  
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
