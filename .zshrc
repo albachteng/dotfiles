@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/graham/.oh-my-zsh"
+export ZSH="/home/galbachten/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -23,7 +23,7 @@ precmd() { print "" }
 # partial completion suggestions
  zstyle ':completion:*' list-suffixeszstyle ':completion:*' expand prefix suffix
 
-# turn on tabbed completion 
+# turn on tabbed completion
 autoload -Uz compinit && compinit
 
 # Uncomment the following line to use case-sensitive completion.
@@ -129,3 +129,7 @@ zstyle :compinstall filename '/Users/graham/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+source $ZSH/oh-my-zsh.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
