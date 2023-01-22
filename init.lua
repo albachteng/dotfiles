@@ -82,12 +82,6 @@ require('packer').startup(function(use)
       "kyazdani42/nvim-web-devicons",
     }
     use {
-      "akinsho/bufferline.nvim",
-    }
-
-    -- use { "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" }
-
-    use {
       "akinsho/toggleterm.nvim",
     }
     use {
@@ -186,7 +180,6 @@ require('packer').startup(function(use)
 end)
 
 require "user.options"
-require "user.keymaps"
 -- require "user.plugins"
 require "user.autocommands"
 require "user.colorscheme"
@@ -194,10 +187,9 @@ require "user.cmp"
 require "user.telescope"
 require "user.treesitter"
 require "user.autopairs"
-require "user.comment"
+-- require "user.comment"
 require "user.gitsigns"
 require "user.nvim-tree"
--- require "user.bufferline"
 require "user.lualine"
 require "user.toggleterm"
 require "user.project"
@@ -209,33 +201,30 @@ require "user.lsp"
 require "user.dap"
 require "user.go"
 
--- require('refactoring').setup({
-    -- prompt_func_return_type = {
-        -- go = false,
-        -- java = false,
---
+require('refactoring').setup({
+    prompt_func_return_type = {
+        go = true,
+        java = false,
         -- cpp = false,
-        -- c = false,
-        -- h = false,
-        -- hpp = false,
-        -- cxx = false,
-    -- },
-    -- prompt_func_param_type = {
-        -- go = false,
-        -- java = false,
---
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+    },
+    prompt_func_param_type = {
+        go = false,
+        java = false,
         -- cpp = false,
-        -- c = false,
-        -- h = false,
-        -- hpp = false,
-        -- cxx = false,
-    -- },
-    -- printf_statements = {},
-    -- print_var_statements = {},
--- })
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+    },
+    printf_statements = {},
+    print_var_statements = {},
+})
 
-
--- When we are bootstrapping a configuration, it doesn't
+ -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
 --
 -- You'll need to restart nvim, and then it will work.
@@ -519,154 +508,4 @@ mason_lspconfig.setup_handlers {
 -- Turn on lsp status information
 require('fidget').setup()
 
--- nvim-cmp setup
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-
--- -- cmp.setup {
---   snippet = {
---     expand = function(args)
---       luasnip.lsp_expand(args.body)
---     end,
---   },
---   mapping = cmp.mapping.preset.insert {
---     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
---     ['<C-f>'] = cmp.mapping.scroll_docs(4),
---     ['<C-Space>'] = cmp.mapping.complete(),
---     ['<CR>'] = cmp.mapping.confirm {
---       behavior = cmp.ConfirmBehavior.Replace,
---       select = true,
---     },
---     ['<Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_next_item()
---       elseif luasnip.expand_or_jumpable() then
---         luasnip.expand_or_jump()
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---     ['<S-Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_prev_item()
---       elseif luasnip.jumpable(-1) then
---         luasnip.jump(-1)
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---   },
---   sources = {
---     { name = 'nvim_lsp' },
---     { name = 'luasnip' },
---   },
--- }
---
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
-
--- Keymaps for better default experience
--- Shorten function name
-local keymap = vim.keymap.set
--- Silent keymap option
-local opts = { silent = true }
--- See `:help vim.keymap.set()`
-keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
-
--- Normal --
--- ctrl-h/j/k/l window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
-
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Clear highlights
-keymap("n", "<leader> ", "<cmd>nohlsearch<CR>", opts)
-
--- Close buffers NTS - dangerous
--- keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
-
--- Better paste (clipboard)
-keymap("v", "p", '"_dP', opts)
-
--- Insert --
--- Press jk fast to exit insert
-keymap("i", "jk", "<ESC>", opts)
-
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Plugins --
--- NvimTree
--- consider F3 instead?
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-
--- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-
--- Git NTS
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
-
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
-
--- -- DAP
--- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
--- keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
--- keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
--- keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
--- keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
--- keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
--- keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
--- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
--- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-
--- Center the cursor vertically when moving to the next word in a search
-keymap("n", "n", "nzz", opts)
-keymap("n", "N", "Nzz", opts)
-
--- normalize the . command
-keymap("v", ".", ":norm.<CR>")
-
--- tmux sessionizer
--- keymap("n", "<C-f>", "!tmux neww ~/tmux-sessionizer<CR>", opts)
-
--- tab easier to hit than % for brackets pairing
-keymap("n", "<tab>", "%", opts)
-keymap("v", "<tab>", "%", opts)
-
--- strip trailing whitespace
-keymap("n", "<leader>W", ":%s/\\s\\+$//e<CR>", opts)
-
+require "user.keymaps"
