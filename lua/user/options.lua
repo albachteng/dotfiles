@@ -1,6 +1,5 @@
 local v = vim.opt
 
-
 v.filetype = "on"
 -- creates a backup file
 v.backup = false
