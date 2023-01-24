@@ -87,3 +87,6 @@ keymap("n", "<leader>W", ":%s/\\s\\+$//e<CR>", opts)
 keymap('n', '[d', vim.diagnostic.goto_prev)
 keymap('n', ']d', vim.diagnostic.goto_next)
 keymap('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- undo tree
+keymap('n', '<leader>u', vim.cmd.UndotreeToggle)

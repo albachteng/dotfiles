@@ -142,16 +142,9 @@ return packer.startup(function(use)
     use { "ravenxrz/DAPInstall.nvim" }
     use { "leoluz/nvim-dap-go"}
 
-  --- refactoring
-  use {
-    "ThePrimeagen/refactoring.nvim",
-    requires = {
-      {"nvim-lua/plenary.nvim"},
-      {"nvim-treesitter/nvim-treesitter"}
-    }
-  }
   use { "ThePrimeagen/harpoon" }
--- }
+
+  use { "mbbill/undotree" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
