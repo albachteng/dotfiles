@@ -40,8 +40,6 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
-    -- Have packer manage itself
 
   use 'wbthomason/packer.nvim'
   use { "ellisonleao/gruvbox.nvim" }
@@ -82,7 +80,6 @@ return packer.startup(function(use)
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
-
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -132,7 +129,7 @@ return packer.startup(function(use)
   use { "RRethy/vim-illuminate" }
   use {
     "ray-x/go.nvim",
-    -- config = require("go"),
+    -- config = require("user.go"),
     -- ft = { "go" }
   }
 

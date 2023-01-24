@@ -82,3 +82,8 @@ keymap("v", "<tab>", "%", opts)
 
 -- strip trailing whitespace
 keymap("n", "<leader>W", ":%s/\\s\\+$//e<CR>", opts)
+
+-- Diagnostic keymaps
+keymap('n', '[d', vim.diagnostic.goto_prev)
+keymap('n', ']d', vim.diagnostic.goto_next)
+keymap('n', '<leader>q', vim.diagnostic.setloclist)
