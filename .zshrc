@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/galbachten/.oh-my-zsh"
+export ZSH="/Users/graham/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -130,7 +130,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/Users/graham/go/bin
 source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

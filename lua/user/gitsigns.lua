@@ -12,15 +12,3 @@ gitsigns.setup {
     changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
   },
 }
-
--- Gitsigns
--- See `:help gitsigns.txt`
--- require('gitsigns').setup {
-  -- signs = {
-    -- add = { text = '+' },
-    -- change = { text = '~' },
-    -- delete = { text = '_' },
-    -- topdelete = { text = '‾' },
-    -- changedelete = { text = '~' },
-  -- },
--- }

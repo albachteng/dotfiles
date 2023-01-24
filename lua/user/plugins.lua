@@ -143,6 +143,7 @@ return packer.startup(function(use)
     use { "mfussenegger/nvim-dap" }
     use { "rcarriga/nvim-dap-ui" }
     use { "ravenxrz/DAPInstall.nvim" }
+    use { "leoluz/nvim-dap-go"}
 
   --- refactoring
   use {

@@ -17,10 +17,10 @@ require "user.project"
 require "user.impatient"
 require "user.illuminate"
 require "user.indentline"
-require "user.alpha"
+-- require "user.alpha"
 require "user.lsp"
 require "user.dap"
-require "user.go"
+-- require "user.go"
 
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
