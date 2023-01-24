@@ -4,6 +4,9 @@ if not status_ok then
 end
 
 local actions = require "telescope.actions"
+local builtin = require('telescope.builtin')
+
+vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 
 telescope.setup {
   defaults = {

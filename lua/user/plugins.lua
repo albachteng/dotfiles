@@ -42,6 +42,117 @@ packer.init {
 return packer.startup(function(use)
   -- My plugins here
     -- Have packer manage itself
+
+  use 'wbthomason/packer.nvim'
+  use { "ellisonleao/gruvbox.nvim" }
+
+  use { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      'j-hui/fidget.nvim',
+
+      -- Additional lua configuration, makes nvim stuff amazing
+      'folke/neodev.nvim',
+    },
+  }
+
+  use { -- Autocompletion
+    'hrsh7th/nvim-cmp',
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  }
+
+  use { -- Highlight, edit, and navigate code
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+  }
+
+  use { -- Additional text objects via treesitter
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  }
+  use { "kyazdani42/nvim-tree.lua" }
+
+  -- Git related plugins
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-rhubarb'
+
+  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
+  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+
+  -- Fuzzy Finder (files, lsp, etc)
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  -- Useful lua functions used by lots of plugins
+  use { "nvim-lua/plenary.nvim" }
+
+  -- Autopairs, integrates with both cmp and treesitter
+  use { "windwp/nvim-autopairs" }
+  use { "Pocco81/AutoSave.nvim" }
+  use { "JoosepAlviste/nvim-ts-context-commentstring" }
+  use { "kyazdani42/nvim-web-devicons" }
+  use { "akinsho/toggleterm.nvim" }
+  use { "ahmedkhalf/project.nvim" }
+  use { "lewis6991/impatient.nvim" }
+  use { "goolord/alpha-nvim" }
+
+-- cmp plugins
+  -- buffer completions
+  use { "hrsh7th/cmp-buffer" }
+  -- path completions
+  use { "hrsh7th/cmp-path" }
+  -- snippet completions
+  use { "saadparwaiz1/cmp_luasnip" }
+  use { "hrsh7th/cmp-nvim-lsp" }
+  use { "hrsh7th/cmp-nvim-lua" }
+
+  -- snippets
+    --snippet engine
+  use { "L3MON4D3/LuaSnip" }
+    -- a bunch of snippets to use
+  use { "rafamadriz/friendly-snippets" }
+
+  -- LSP
+    -- simple to use language server installer
+  use { "williamboman/nvim-lsp-installer" }
+
+    -- for formatters and linters
+  use { "jose-elias-alvarez/null-ls.nvim" }
+  use { "RRethy/vim-illuminate" }
+  use {
+    "ray-x/go.nvim",
+    -- config = require("go"),
+    -- ft = { "go" }
+  }
+
+  -- Git
+    use { "lewis6991/gitsigns.nvim" }
+
+  -- DAP
+    use { "mfussenegger/nvim-dap" }
+    use { "rcarriga/nvim-dap-ui" }
+    use { "ravenxrz/DAPInstall.nvim" }
+
+  --- refactoring
+  use {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      {"nvim-lua/plenary.nvim"},
+      {"nvim-treesitter/nvim-treesitter"}
+    }
+  }
+  use { "ThePrimeagen/harpoon" }
 -- }
 
   -- Automatically set up your configuration after cloning packer.nvim
@@ -50,3 +161,5 @@ return packer.startup(function(use)
     require("packer").sync()
   end
 end)
+
+
